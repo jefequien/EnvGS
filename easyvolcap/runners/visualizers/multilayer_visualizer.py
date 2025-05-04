@@ -61,8 +61,8 @@ class MultilayerVisualizer(VolumetricVideoVisualizer):  # this should act as a b
             result_dir = dirname(join(self.result_dir, self.img_pattern)).format(type=type.name, camera=self.camera, frame=self.frame)
             result_str = f'"{result_dir}/*{self.vis_ext}"'
             output_path = result_str[1:].split('*')[0][:-1] + '.mp4'
-            # generate_video(result_str, output_path, self.video_fps)  # one video for one type?
-            # log(f'Video generated: {yellow(output_path)}')
+            generate_video(result_str, output_path, self.video_fps)  # one video for one type?
+            log(f'Video generated: {yellow(output_path)}')
 
             # Generate video for each layer
             for i in range(self.num_layers):
@@ -70,8 +70,8 @@ class MultilayerVisualizer(VolumetricVideoVisualizer):  # this should act as a b
                 result_dir = dirname(join(self.result_dir, self.img_pattern)).format(type=type.name, camera=self.camera, frame=self.frame)
                 result_str = f'"{result_dir}/*{self.vis_ext}"'
                 output_path = result_str[1:].split('*')[0][:-1] + '.mp4'
-                # output_path = generate_video(result_str, output_path, self.video_fps)
-                # log(f'Video generated: {yellow(output_path)}')
+                output_path = generate_video(result_str, output_path, self.video_fps)
+                log(f'Video generated: {yellow(output_path)}')
 
         if self.verbose:
             types = '{' + ','.join([t.name for t in self.types]) + '}'

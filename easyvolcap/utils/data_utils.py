@@ -155,7 +155,7 @@ def generate_video(result_str: str,
         '-vf', '"pad=ceil(iw/2)*2:ceil(ih/2)*2"',  # avoid yuv420p odd number bug
         output,
     ]
-    run(cmd)
+    # run(cmd)
     return output
 
 
