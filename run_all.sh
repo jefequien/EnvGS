@@ -22,19 +22,18 @@ python3 -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get
 # SCENE_LIST="sedan toycar spheres"
 # TRAJ_NAME="spiral"
 
-DATASET_NAME="360_v2"
+# DATASET_NAME="360_v2"
 # SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
-SCENE_LIST="kitchen room treehill flowers bicycle stump"
-TRAJ_NAME="spiral"
+# TRAJ_NAME="spiral"
 
 # DATASET_NAME="neural_catacaustics"
 # SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
 # TRAJ_NAME="spiral"
 
-# DATASET_NAME="renders"
-# # SCENE_LIST="shiny_kitchen shiny_livingroom shiny_office shiny_bedroom"
-# SCENE_LIST="shiny_office shiny_bedroom"
-# TRAJ_NAME="spiral"
+DATASET_NAME="renders"
+# SCENE_LIST="shiny_kitchen shiny_livingroom shiny_office shiny_bedroom"
+SCENE_LIST="multichromeball_kitchen_v2 multichromeball_identical_kitchen_v2 multichromeball_tint_kitchen_v2 multichromeball_value_kitchen_v2"
+TRAJ_NAME="spiral"
 
 for SCENE in $SCENE_LIST;
 do
@@ -44,9 +43,9 @@ do
     evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
     # Move checkpoint and render novel views
-    mkdir -p data/trained_model/envgs_$SCENE
-    cp data/trained_model/envgs/$DATASET_NAME/envgs_$SCENE/latest.npz  data/trained_model/envgs_$SCENE/latest.npz 
-    evc-test -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml,configs/specs/$TRAJ_NAME.yaml
+    # mkdir -p data/trained_model/envgs_$SCENE
+    # cp data/trained_model/envgs/$DATASET_NAME/envgs_$SCENE/latest.npz  data/trained_model/envgs_$SCENE/latest.npz 
+    evc-test -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml,configs/specs/$TRAJ_NAME.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
     # Saving videos
     IMAGES_DIR=data/novel_view/envgs_$SCENE
