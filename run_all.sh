@@ -43,7 +43,7 @@ do
     echo "Running $SCENE"
 
     # Train
-    evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
+    # evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
     # Move checkpoint and render novel views
     mkdir -p data/trained_model/envgs_$SCENE
