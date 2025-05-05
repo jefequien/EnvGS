@@ -1,9 +1,9 @@
 #!/bin/bash 
 set -xe
 
-#OAR -q production 
-#OAR -l host=1/gpu=2,walltime=24:00:00
-#OAR -p gpu_model='H100 NVL'
+#OAR -q besteffort 
+#OAR -l host=1/gpu=1,walltime=48:00:00
+#OAR -p l40s
 #OAR -O OAR_%jobid%.out
 #OAR -E OAR_%jobid%.err 
 
@@ -22,16 +22,14 @@ python3 -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get
 # SCENE_LIST="sedan toycar spheres"
 # TRAJ_NAME="spiral"
 
-# DATASET_NAME="360_v2"
-# # SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
-# # SCENE_LIST="bicycle stump treehill flowers"
-# SCENE_LIST="bonsai counter kitchen room"
-# TRAJ_NAME="spiral"
-
-DATASET_NAME="neural_catacaustics"
-# SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
-SCENE_LIST="wateringcan2"
+DATASET_NAME="360_v2"
+# SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
+SCENE_LIST="kitchen room treehill flowers bicycle stump"
 TRAJ_NAME="spiral"
+
+# DATASET_NAME="neural_catacaustics"
+# SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
+# TRAJ_NAME="spiral"
 
 # DATASET_NAME="renders"
 # # SCENE_LIST="shiny_kitchen shiny_livingroom shiny_office shiny_bedroom"
@@ -43,7 +41,7 @@ do
     echo "Running $SCENE"
 
     # Train
-    # evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
+    evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
     # Move checkpoint and render novel views
     mkdir -p data/trained_model/envgs_$SCENE
