@@ -22,15 +22,16 @@ python3 -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get
 # SCENE_LIST="sedan toycar spheres"
 # TRAJ_NAME="spiral"
 
-DATASET_NAME="360_v2"
-# SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
-# SCENE_LIST="bicycle stump treehill flowers"
-SCENE_LIST="bonsai counter kitchen room"
-TRAJ_NAME="spiral"
-
-# DATASET_NAME="neural_catacaustics"
-# SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
+# DATASET_NAME="360_v2"
+# # SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
+# # SCENE_LIST="bicycle stump treehill flowers"
+# SCENE_LIST="bonsai counter kitchen room"
 # TRAJ_NAME="spiral"
+
+DATASET_NAME="neural_catacaustics"
+# SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
+SCENE_LIST="wateringcan2"
+TRAJ_NAME="spiral"
 
 # DATASET_NAME="renders"
 # # SCENE_LIST="shiny_kitchen shiny_livingroom shiny_office shiny_bedroom"
