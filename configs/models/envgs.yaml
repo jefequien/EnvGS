@@ -20,7 +20,7 @@ runner_cfg:
     ep_iter: 500
     save_latest_ep: 10
     save_ep: 80
-    eval_ep: 10
+    eval_ep: 80
     log_interval: 1
     record_images_to_tb: False # save disk space
 

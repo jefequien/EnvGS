@@ -24,7 +24,7 @@ python3 -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get
 
 DATASET_NAME="360_v2"
 # SCENE_LIST="garden bicycle stump bonsai counter kitchen room treehill flowers"
-SCENE_LIST="flowers" # kitchen bicycle stump
+SCENE_LIST="counter"
 TRAJ_NAME="spiral"
 
 # DATASET_NAME="neural_catacaustics"
@@ -43,6 +43,9 @@ do
     # Train
     evc-train -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
+    # Eval
+    evc-test -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
+
     # Render novel views
     evc-test -c configs/exps/envgs/$DATASET_NAME/envgs_$SCENE.yaml,configs/specs/$TRAJ_NAME.yaml exp_name=envgs/$DATASET_NAME/envgs_$SCENE
 
@@ -51,6 +54,7 @@ do
     ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/RENDER/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/RENDER.mp4"
     ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/DIFFUSE/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/DIFFUSE.mp4"
     ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/REFLECTION/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/REFLECTION.mp4"
-    ffmpeg -i "$IMAGES_DIR/RENDER.mp4" -i "$IMAGES_DIR/DIFFUSE.mp4" -i "$IMAGES_DIR/REFLECTION.mp4" -filter_complex "[0:v][1:v][2:v]hstack=inputs=3[v]" -map "[v]" "$IMAGES_DIR/RENDER,DIFFUSE,REFLECTION.mp4"
+    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/NORMAL/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/NORMAL.mp4"
+    ffmpeg -y -i "$IMAGES_DIR/RENDER.mp4" -i "$IMAGES_DIR/DIFFUSE.mp4" -i "$IMAGES_DIR/REFLECTION.mp4" -i "$IMAGES_DIR/NORMAL.mp4" -filter_complex "[0:v][1:v][2:v][3:v]hstack=inputs=4[v]" -map "[v]" "$IMAGES_DIR/RENDER,DIFFUSE,REFLECTION,NORMAL.mp4"
 
 done

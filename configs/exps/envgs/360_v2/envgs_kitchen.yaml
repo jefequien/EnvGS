@@ -5,15 +5,10 @@ configs:
 
 model_cfg:
     sampler_cfg:
-        # Base Gaussian
-        densify_until_iter: 30000
-        normal_prop_until_iter: 24000
-        color_sabotage_until_iter: 24000
-        # Environment Gaussian
-        env_densify_until_iter: 30000
-
-runner_cfg:
-    epochs: 120
+        init_specular: 0.1 # large initial specular
+        sh_start_iter: 10000 # let the base Gaussian be view-independent first
+    supervisor_cfg:
+        perc_loss_weight: 0.1
 
 # prettier-ignore
 exp_name: {{fileBasenameNoExtension}}

@@ -2,7 +2,7 @@ configs: configs/specs/vis.yaml
 val_dataloader_cfg:
     dataset_cfg:
         type: VolumetricVideoInferenceDataset
-        render_size: [1080, 1920] # when overwritting, will change K, prefer not to
+        # render_size: [1080, 1920] # when overwritting, will change K, prefer not to
         interp_type: ORBIT
         render_path_root: data/novel_view
     sampler_cfg:

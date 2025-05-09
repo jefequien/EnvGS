@@ -217,11 +217,11 @@ class VolumetricVideoVisualizer:  # this should act as a base class for other ty
 
         elif type == Visualization.DIFFUSE:
             if 'dif_rgb_map' not in output: return None, None, None
-            img = output.dif_rgb_map
+            img = output.dif_rgb_map * (1 - output.spec_map)
 
         elif type == Visualization.REFLECTION:
             if 'ref_rgb_map' not in output: return None, None, None
-            img = output.ref_rgb_map
+            img = output.ref_rgb_map * output.spec_map
 
         else:
             raise NotImplementedError(f'Unimplemented visualization type: {type}')
