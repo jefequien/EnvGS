@@ -1,0 +1,24 @@
+configs:
+    - configs/datasets/ref_real/ref_real.yaml
+
+dataloader_cfg:
+    dataset_cfg: &dataset_cfg
+        ratio: 0.75
+        data_root: data/datasets/renders_gtnormals/shiny_bedroom/train
+        view_sample: [0, null, 1]
+
+val_dataloader_cfg:
+    dataset_cfg:
+        ratio: 0.75
+        data_root: data/datasets/renders_gtnormals/shiny_bedroom/test
+        view_sample: [0, null, 1]
+
+model_cfg:
+    sampler_cfg:
+        preload_gs: data/datasets/renders_gtnormals/shiny_bedroom/train/sparse/0/points3D.ply
+        spatial_scale: 0.9296048048625781
+        # Environment Gaussian
+        env_preload_gs: data/datasets/renders_gtnormals/shiny_bedroom/train/envs/points3D.ply
+        # env_bounds: [[-30.0, -30.0, -30.0], [30.0, 30.0, 30.0]]
+        env_bounds: [[-0.8409135443701363, -0.44007256053019966, -0.3011496750100942],
+         [0.6514130466032828, 0.47599751908445154, 0.4048237661511876]]
