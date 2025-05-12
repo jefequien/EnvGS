@@ -51,10 +51,10 @@ do
 
     # Saving videos
     IMAGES_DIR=data/novel_view/envgs/$DATASET_NAME/envgs_$SCENE
-    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/RENDER/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/RENDER.mp4"
-    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/DIFFUSE/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/DIFFUSE.mp4"
-    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/REFLECTION/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/REFLECTION.mp4"
-    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/NORMAL/*.png"   -c:v libx264 -pix_fmt yuv420p "$IMAGES_DIR/NORMAL.mp4"
+    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/RENDER/*.png" -c:v libx264 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -pix_fmt yuv420p "$IMAGES_DIR/RENDER.mp4"
+    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/DIFFUSE/*.png" -c:v libx264 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -pix_fmt yuv420p "$IMAGES_DIR/DIFFUSE.mp4"
+    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/REFLECTION/*.png" -c:v libx264 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -pix_fmt yuv420p "$IMAGES_DIR/REFLECTION.mp4"
+    ffmpeg -y -framerate 30 -pattern_type glob -i "$IMAGES_DIR/NORMAL/*.png" -c:v libx264 -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2" -pix_fmt yuv420p "$IMAGES_DIR/NORMAL.mp4"
     ffmpeg -y -i "$IMAGES_DIR/RENDER.mp4" -i "$IMAGES_DIR/DIFFUSE.mp4" -i "$IMAGES_DIR/REFLECTION.mp4" -i "$IMAGES_DIR/NORMAL.mp4" -filter_complex "[0:v][1:v][2:v][3:v]hstack=inputs=4[v]" -map "[v]" "$IMAGES_DIR/RENDER,DIFFUSE,REFLECTION,NORMAL.mp4"
 
 done
