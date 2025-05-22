@@ -223,6 +223,24 @@ class VolumetricVideoVisualizer:  # this should act as a base class for other ty
             if 'ref_rgb_map' not in output: return None, None, None
             img = output.ref_rgb_map * output.spec_map
 
+        elif type == Visualization.CUSTOM:
+            def tonemap(x, gamma=1.3):  
+                x = x.nan_to_num(posinf=999999999.9)
+                x = (x * (6.2 * x + 0.5)) / (x * (6.2 * x + 1.7) + 0.06)
+                x = x**gamma
+                return x
+
+            def untonemap(y, gamma=1.3, eps=1e-6):
+                y = y ** (1 / gamma)
+                numerator = 0.1371 * y + 0.09549 * (y**2 - 0.1512 * y + 0.1783) ** 0.5 - 0.04032
+                denominator = 1 - y + eps
+                x = numerator / denominator
+                return x
+            render = output.rgb_map
+            diffuse_render = output.dif_rgb_map * (1 - output.spec_map)
+            residual = tonemap((untonemap(render) - untonemap(diffuse_render)).clamp(0)).clamp(0, 1)
+            img = residual
+
         else:
             raise NotImplementedError(f'Unimplemented visualization type: {type}')
 

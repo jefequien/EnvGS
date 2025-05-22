@@ -69,7 +69,8 @@ class VolumetricVideoInferenceDataset(VolumetricVideoDataset):
 
         self.render_size_default = render_size_default
         # self.render_size = render_size
-        self.render_size = [0.25 * (self.Ks[0,0,1,2] * 2), 0.25 * (self.Ks[0,0,0,2] * 2)]
+        self.ratio = 1.0
+        self.render_size = [self.ratio * (self.Ks[0,0,1,2] * 2), self.ratio * (self.Ks[0,0,0,2] * 2)]
         # self.focal_ratio = focal_ratio
         self.focal_ratio = self.Ks[0,0,0,0] / (self.Ks[0,0,0,2] * 2)
         self.load_default_sizes()

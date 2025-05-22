@@ -296,6 +296,8 @@ class Visualization(Enum):
     FEATURE = auto()  # embedder results
     SEMANTIC = auto()  # semantic nerf related
     SRCINPS = auto()  # Souce input images for image based rendering
+    
+    CUSTOM = auto()  # custom
 
     # jacobian related
     JACOBIAN = auto()
