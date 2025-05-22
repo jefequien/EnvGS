@@ -30,8 +30,8 @@ python3 -c "import torch; print(torch.cuda.is_available()); print(torch.cuda.get
 # SCENE_LIST="compost concave_bowl2 crazy_blade2 hallway_lamp multibounce silver_vase2 wateringcan2"
 # TRAJ_NAME="spiral"
 
-# DATASET_NAME="renders_gtnormals"
-DATASET_NAME="renders_prnormals"
+DATASET_NAME="renders_gtnormals"
+# DATASET_NAME="renders_prnormals"
 SCENE_LIST="shiny_kitchen shiny_livingroom shiny_office shiny_bedroom"
 # SCENE_LIST="multichromeball_kitchen_v2 multichromeball_identical_kitchen_v2 multichromeball_tint_kitchen_v2 multichromeball_value_kitchen_v2"
 TRAJ_NAME="spiral"
