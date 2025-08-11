@@ -15,7 +15,7 @@ val_dataloader_cfg:
 
 model_cfg:
     sampler_cfg:
-        preload_gs: data/datasets/renders_prnormals/shiny_bedroom/train/sparse/0/points3D.ply
+        preload_gs: data/datasets/renders_prnormals/shiny_bedroom/train/sparse/0/points3D_dense.ply
         spatial_scale: 0.9296048048625781
         # Environment Gaussian
         env_preload_gs: data/datasets/renders_prnormals/shiny_bedroom/train/envs/points3D.ply
